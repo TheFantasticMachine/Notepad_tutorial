@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.util.HashMap;
 
 public class GUI {
 
@@ -7,6 +6,8 @@ public class GUI {
     JFrame window;
     JTextArea textArea;
     JScrollPane scrollPane; // for scroll bar
+    JMenuBar menuBar; // for the menu at the top where usually stuff like [Edit Help Window] is
+    JMenu fileMenu, editMenu, formatMenu, colorMenu;
 
     public static void main(String[] args) {
         new GUI();
@@ -15,6 +16,7 @@ public class GUI {
     public GUI() {
         createWindow();
         createTextArea();
+        createMenuBar();
 
         window.setVisible(true);
     }
@@ -36,5 +38,24 @@ public class GUI {
 
         // adds the scroll bar and the text area
         window.add(scrollPane);
+    }
+
+    public void createMenuBar() {
+        menuBar = new JMenuBar();
+
+        fileMenu = new JMenu("File");
+        editMenu = new JMenu("Edit");
+        formatMenu = new JMenu("Format");
+        colorMenu = new JMenu("Color");
+
+        // add menus to the menu bar
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(formatMenu);
+        menuBar.add(colorMenu);
+
+
+        // add to window by setting it as its menu bar
+        window.setJMenuBar(menuBar);
     }
 }
