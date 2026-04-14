@@ -8,6 +8,7 @@ public class GUI {
     JScrollPane scrollPane; // for scroll bar
     JMenuBar menuBar; // for the menu at the top where usually stuff like [Edit Help Window] is
     JMenu fileMenu, editMenu, formatMenu, colorMenu;
+    JMenuItem iNew, iOpen, iSave, iSaveAs, iExit;
 
     public static void main(String[] args) {
         new GUI();
@@ -17,6 +18,7 @@ public class GUI {
         createWindow();
         createTextArea();
         createMenuBar();
+        createFileMenu();
 
         window.setVisible(true);
     }
@@ -57,5 +59,19 @@ public class GUI {
 
         // add to window by setting it as its menu bar
         window.setJMenuBar(menuBar);
+    }
+
+    public void createFileMenu() {
+        iNew = new JMenuItem("New");
+        iOpen = new JMenuItem("Open");
+        iSave = new JMenuItem("Save");
+        iSaveAs = new JMenuItem("Save As");
+        iExit = new JMenuItem("Exit");
+
+        fileMenu.add(iNew);
+        fileMenu.add(iOpen);
+        fileMenu.add(iSave);
+        fileMenu.add(iSaveAs);
+        fileMenu.add(iExit);
     }
 }
