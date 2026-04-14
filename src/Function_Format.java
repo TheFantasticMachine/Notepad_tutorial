@@ -77,4 +77,22 @@ public class Function_Format {
             System.out.println("Error while loading fonts ... "  + e);
         }
     }
+
+    public void wordWrap() {
+        if (!gui.wordWrapOn) {
+            gui.wordWrapOn = true;
+            gui.textArea.setLineWrap(true);
+            gui.textArea.setWrapStyleWord(true);
+            gui.iWrap.setText("Word Wrap: On");
+        }
+        else {
+            gui.wordWrapOn = false;
+            gui.iWrap.setText("Word Wrap: Off");
+        }
+    }
+
+    public void updateFont() {
+        Font newFont = new Font(fonts.get(currentFontName).getFontName(), Font.PLAIN, currentFontSize);
+        gui.textArea.setFont(newFont);
+    }
 }

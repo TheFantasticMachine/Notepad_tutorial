@@ -11,6 +11,7 @@ public class GUI implements ActionListener {
     // text area
     JTextArea textArea;
     JScrollPane scrollPane; // for scroll bar
+    boolean wordWrapOn = false;
 
     // menu bar
     JMenuBar menuBar; // for the menu at the top where usually stuff like [Edit Help Window] is
@@ -107,7 +108,7 @@ public class GUI implements ActionListener {
     public void createFormatMenu() {
         iWrap = new JMenuItem("Word Wrap: Off");
         iWrap.addActionListener(this);
-        iWrap.setActionCommand("Wrap");
+        iWrap.setActionCommand("formatMenu_Wrap");
 
         // creating font menu and its submenu
         mFont = new JMenu("Font");
@@ -164,11 +165,14 @@ public class GUI implements ActionListener {
             if (command.contains("fontSize_")) {
                 format.currentFontSize = Integer.parseInt(command.replaceAll("fontSize_", "").trim());
                 System.out.println(format.currentFontSize);
+                format.updateFont();
             }
             else if (command.contains("fontSet_")) {
                 format.currentFontName = command.replaceAll("fontSet_", "").trim();
                 System.out.println(format.currentFontName);
+                format.updateFont();
             }
+            else if (command.equals("Wrap")) { format.wordWrap(); }
         }
     }
 }
