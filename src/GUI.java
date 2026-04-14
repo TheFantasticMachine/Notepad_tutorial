@@ -21,9 +21,12 @@ public class GUI implements ActionListener {
     // format menu
     JMenuItem iWrap;
     JMenu mFont, mFontSize;
+    // color menu
+    JMenuItem iColor1, iColor2, iColor3;
 
     Function_File file = new Function_File(this);
     Function_Format format = new Function_Format(this);
+    Function_Color color = new Function_Color(this);
 
     public static void main(String[] args) {
         new GUI();
@@ -35,6 +38,7 @@ public class GUI implements ActionListener {
         createMenuBar();
         createFileMenu();
         createFormatMenu();
+        createColorMenu();
 
         window.setVisible(true);
     }
@@ -140,6 +144,24 @@ public class GUI implements ActionListener {
         formatMenu.add(mFontSize);
     }
 
+    public void createColorMenu() {
+        iColor1 = new JMenuItem("White");
+        iColor1.addActionListener(this);
+        iColor1.setActionCommand("colorMenu_White");
+
+        iColor2 = new JMenuItem("Black");
+        iColor2.addActionListener(this);
+        iColor2.setActionCommand("colorMenu_Black");
+
+        iColor3 = new JMenuItem("Purple");
+        iColor3.addActionListener(this);
+        iColor3.setActionCommand("colorMenu_Purple");
+
+        colorMenu.add(iColor1);
+        colorMenu.add(iColor2);
+        colorMenu.add(iColor3);
+    }
+
     // action listener(s)
 
     @Override
@@ -173,6 +195,13 @@ public class GUI implements ActionListener {
                 format.updateFont();
             }
             else if (command.equals("Wrap")) { format.wordWrap(); }
+        }
+        else if (command.startsWith("colorMenu_")) {
+            command = command.replaceAll("colorMenu_", "").trim();
+
+            System.out.println(command);
+
+            color.changeColor(command);
         }
     }
 }
