@@ -6,3 +6,8 @@
 
 - the menu bar is the menu at the top of the window that has its own submenu not a right click menu
 - when adding menus to the menu bar remember that the order matters 
+
+
+## TODO: 
+
+1) improve the action performed listener it could use some for loops

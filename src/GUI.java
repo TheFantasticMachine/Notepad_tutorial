@@ -79,23 +79,23 @@ public class GUI implements ActionListener {
     public void createFileMenu() {
         iNew = new JMenuItem("New");
         iNew.addActionListener(this);
-        iNew.setActionCommand("New");
+        iNew.setActionCommand("fileMenu_New");
 
         iOpen = new JMenuItem("Open");
         iOpen.addActionListener(this);
-        iOpen.setActionCommand("Open");
+        iOpen.setActionCommand("fileMenu_Open");
 
         iSave = new JMenuItem("Save");
         iSave.addActionListener(this);
-        iSave.setActionCommand("Save");
+        iSave.setActionCommand("fileMenu_Save");
 
         iSaveAs = new JMenuItem("Save As");
         iSaveAs.addActionListener(this);
-        iSaveAs.setActionCommand("Save As");
+        iSaveAs.setActionCommand("fileMenu_Save As");
 
         iExit = new JMenuItem("Exit");
         iExit.addActionListener(this);
-        iExit.setActionCommand("Exit");
+        iExit.setActionCommand("fileMenu_Exit");
 
         fileMenu.add(iNew);
         fileMenu.add(iOpen);
@@ -109,6 +109,7 @@ public class GUI implements ActionListener {
         iWrap.addActionListener(this);
         iWrap.setActionCommand("Wrap");
 
+        // creating font menu and its submenu
         mFont = new JMenu("Font");
 
         format.createFonts();
@@ -118,12 +119,20 @@ public class GUI implements ActionListener {
 
             JMenuItem iFont = new JMenuItem(key);
             iFont.addActionListener(this);
-            iFont.setActionCommand("font_"+ key);
+            iFont.setActionCommand("formatMenu_fontSet_"+ key);
 
             mFont.add(iFont);
         }
 
+        // creating font size menu
         mFontSize = new JMenu("Font Size");
+        int[] fontSizes = {8, 12, 16, 20, 24, 28, 32};
+        for (int fontSize : fontSizes) {
+            JMenuItem iFontSize = new JMenuItem(Integer.toString(fontSize));
+            iFontSize.addActionListener(this);
+            iFontSize.setActionCommand("formatMenu_fontSize_" + fontSize);
+            mFontSize.add(iFontSize);
+        }
 
         formatMenu.add(iWrap);
         formatMenu.add(mFont);
@@ -136,26 +145,30 @@ public class GUI implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand(); // get the command
 
-        switch (command) {
-            // file menu commands
-            case "New": file.newFile(); break;
-            case "Open": file.open(); break;
-            case "Save": file.save(); break;
-            case "Save As": file.saveAs(); break;
-            case "Exit": file.exit(); break;
+        if(command.startsWith("fileMenu_")) {
+            command = command.replaceAll("fileMenu_", "").trim();
 
-            // format menu commands
+            System.out.println(command);
 
-            // -> fonts
-            case "font_IBM": System.out.println(command); break;
-            case "font_Roboto": System.out.println(command); break;
-            case "font_Shadows": System.out.println(command); break;
-            case "font_Special": System.out.println(command); break;
-            case "font_Tomorrow": System.out.println(command); break;
-            case "font_UnifrakturMaguntia": System.out.println(command); break;
-            case "font_Vampiro": System.out.println(command); break;
-            case "font_VT323": System.out.println(command); break;
-            case "font_Workbench": System.out.println(command); break;
+            if (command.equals("New")) { file.newFile(); }
+            if (command.equals("Open")) { file.open(); }
+            if (command.equals("Save")) { file.save(); }
+            if (command.equals("Save As")) { file.saveAs(); }
+            if (command.equals("Exit")) { file.exit(); }
+        }
+        else if (command.startsWith("formatMenu_")) {
+            command = command.replaceAll("formatMenu_", "").trim();
+
+            System.out.println(command);
+
+            if (command.contains("fontSize_")) {
+                format.currentFontSize = Integer.parseInt(command.replaceAll("fontSize_", "").trim());
+                System.out.println(format.currentFontSize);
+            }
+            else if (command.contains("fontSet_")) {
+                format.currentFontName = command.replaceAll("fontSet_", "").trim();
+                System.out.println(format.currentFontName);
+            }
         }
     }
 }

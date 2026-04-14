@@ -22,6 +22,9 @@ public class Function_Format {
     Font IBM, Roboto, Shadows, Special, Tomorrow, UnifrakturMaguntia, Vampiro, VT323, Workbench;
     Dictionary<String, Font> fonts = new Hashtable<>();
 
+    int currentFontSize = 12;
+    String currentFontName = "Roboto";
+
     GUI gui;
 
     public Function_Format(GUI gui) {
