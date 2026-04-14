@@ -13,6 +13,7 @@ public class GUI implements ActionListener {
     JMenuItem iNew, iOpen, iSave, iSaveAs, iExit;
 
     Function_File file = new Function_File(this);
+    Function_Format format = new Function_Format(this);
 
     public static void main(String[] args) {
         new GUI();
