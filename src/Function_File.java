@@ -90,4 +90,8 @@ public class Function_File {
             System.out.println("Error when saving a file ... " + e);
         }
     }
+
+    public void exit() {
+        System.exit(0);
+    }
 }
