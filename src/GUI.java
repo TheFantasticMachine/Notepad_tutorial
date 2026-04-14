@@ -1,16 +1,25 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 public class GUI implements ActionListener {
 
     // window
     JFrame window;
+
+    // text area
     JTextArea textArea;
     JScrollPane scrollPane; // for scroll bar
+
+    // menu bar
     JMenuBar menuBar; // for the menu at the top where usually stuff like [Edit Help Window] is
     JMenu fileMenu, editMenu, formatMenu, colorMenu;
+    // file menu
     JMenuItem iNew, iOpen, iSave, iSaveAs, iExit;
+    // format menu
+    JMenuItem iWrap;
+    JMenu mFont, mFontSize;
 
     Function_File file = new Function_File(this);
     Function_Format format = new Function_Format(this);
@@ -24,6 +33,7 @@ public class GUI implements ActionListener {
         createTextArea();
         createMenuBar();
         createFileMenu();
+        createFormatMenu();
 
         window.setVisible(true);
     }
@@ -94,16 +104,58 @@ public class GUI implements ActionListener {
         fileMenu.add(iExit);
     }
 
+    public void createFormatMenu() {
+        iWrap = new JMenuItem("Word Wrap: Off");
+        iWrap.addActionListener(this);
+        iWrap.setActionCommand("Wrap");
+
+        mFont = new JMenu("Font");
+
+        format.createFonts();
+        Enumeration<String> keys = format.fonts.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+
+            JMenuItem iFont = new JMenuItem(key);
+            iFont.addActionListener(this);
+            iFont.setActionCommand("font_"+ key);
+
+            mFont.add(iFont);
+        }
+
+        mFontSize = new JMenu("Font Size");
+
+        formatMenu.add(iWrap);
+        formatMenu.add(mFont);
+        formatMenu.add(mFontSize);
+    }
+
+    // action listener(s)
+
     @Override
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand(); // get the command
 
         switch (command) {
+            // file menu commands
             case "New": file.newFile(); break;
             case "Open": file.open(); break;
             case "Save": file.save(); break;
             case "Save As": file.saveAs(); break;
             case "Exit": file.exit(); break;
+
+            // format menu commands
+
+            // -> fonts
+            case "font_IBM": System.out.println(command); break;
+            case "font_Roboto": System.out.println(command); break;
+            case "font_Shadows": System.out.println(command); break;
+            case "font_Special": System.out.println(command); break;
+            case "font_Tomorrow": System.out.println(command); break;
+            case "font_UnifrakturMaguntia": System.out.println(command); break;
+            case "font_Vampiro": System.out.println(command); break;
+            case "font_VT323": System.out.println(command); break;
+            case "font_Workbench": System.out.println(command); break;
         }
     }
 }

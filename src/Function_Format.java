@@ -1,10 +1,26 @@
 import java.awt.*;
 import java.io.File;
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+/* NOTES:
+** List of all fonts
+* "IBM"
+* "Roboto"
+* "Shadows"
+* "Special"
+* "Tomorrow"
+* "UnifrakturMaguntia"
+* "Vampiro"
+* "VT323"
+* "Workbench"
+ */
 
 public class Function_Format {
 
     // Fonts
-    Font IBM, Roboto, Shadows, Special, Tomorrow, Uni, Vampiro, VT323, Workbench;
+    Font IBM, Roboto, Shadows, Special, Tomorrow, UnifrakturMaguntia, Vampiro, VT323, Workbench;
+    Dictionary<String, Font> fonts = new Hashtable<>();
 
     GUI gui;
 
@@ -25,7 +41,7 @@ public class Function_Format {
             Shadows = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/ShadowsIntoLightTwo-Regular.ttf")).deriveFont(30f);
             Special = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/SpecialElite-Regular.ttf")).deriveFont(30f);
             Tomorrow = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/Tomorrow-Regular.ttf")).deriveFont(30f);
-            Uni = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/UnifrakturMaguntia-Regular.ttf")).deriveFont(30f);
+            UnifrakturMaguntia = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/UnifrakturMaguntia-Regular.ttf")).deriveFont(30f);
             Vampiro = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/VampiroOne-Regular.ttf")).deriveFont(30f);
             VT323 = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/VT323-Regular.ttf")).deriveFont(30f);
             Workbench = Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/Workbench-Regular-VariableFont_BLED,SCAN.ttf")).deriveFont(30f);
@@ -41,6 +57,16 @@ public class Function_Format {
             ge.registerFont(Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/VampiroOne-Regular.ttf")));
             ge.registerFont(Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/VT323-Regular.ttf")));
             ge.registerFont(Font.createFont( Font.TRUETYPE_FONT, new File("./res/fonts/Workbench-Regular-VariableFont_BLED,SCAN.ttf")));
+
+            fonts.put("IBM", IBM);
+            fonts.put("Roboto", Roboto);
+            fonts.put("Shadows", Shadows);
+            fonts.put("Special", Special);
+            fonts.put("Tomorrow", Tomorrow);
+            fonts.put("UnifrakturMaguntia", UnifrakturMaguntia);
+            fonts.put("Vampiro", Vampiro);
+            fonts.put("VT323", VT323);
+            fonts.put("Workbench", Workbench);
 
             System.out.println("Fonts loaded");
         }
