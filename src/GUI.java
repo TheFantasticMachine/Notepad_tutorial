@@ -1,6 +1,8 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GUI {
+public class GUI implements ActionListener {
 
     // window
     JFrame window;
@@ -9,6 +11,8 @@ public class GUI {
     JMenuBar menuBar; // for the menu at the top where usually stuff like [Edit Help Window] is
     JMenu fileMenu, editMenu, formatMenu, colorMenu;
     JMenuItem iNew, iOpen, iSave, iSaveAs, iExit;
+
+    Function_File file = new Function_File(this);
 
     public static void main(String[] args) {
         new GUI();
@@ -63,7 +67,13 @@ public class GUI {
 
     public void createFileMenu() {
         iNew = new JMenuItem("New");
+        iNew.addActionListener(this);
+        iNew.setActionCommand("New");
+
         iOpen = new JMenuItem("Open");
+        iOpen.addActionListener(this);
+        iOpen.setActionCommand("Open");
+
         iSave = new JMenuItem("Save");
         iSaveAs = new JMenuItem("Save As");
         iExit = new JMenuItem("Exit");
@@ -73,5 +83,15 @@ public class GUI {
         fileMenu.add(iSave);
         fileMenu.add(iSaveAs);
         fileMenu.add(iExit);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        String command = event.getActionCommand(); // get the command
+
+        switch (command) {
+            case "New": file.newFile(); break;
+            case "Open": file.open(); break;
+        }
     }
 }
