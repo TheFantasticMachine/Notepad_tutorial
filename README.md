@@ -11,3 +11,17 @@
 ## TODO: 
 
 1) improve the action performed listener it could use some for loops
+
+
+## How to code:
+
+making a list of objects (simplified):
+```java
+ArrayList<object> list_of_objects = new ArrayLis<>();
+
+// adding
+list_of_objects.add(new object());
+
+// for each
+for(object obj : list_of_obejcts) {}
+```
